@@ -5,7 +5,7 @@ import { LanguageContext } from '../components/LanguageContext';
 import { useContext, useEffect, useState, Suspense } from 'react';
 import { getConversationHistory, getConversations } from '../lib/supabase';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { MdAttachFile, MdLink } from 'react-icons/md';
+import { MdAttachFile, MdClose, MdLink } from 'react-icons/md';
 
 export default function page() {
   const { language } = useContext(LanguageContext);
@@ -89,6 +89,13 @@ export default function page() {
                 )}
               </div>
             ))}
+          <div className={styles.attachment}>
+            <div>
+              <p>Resource.pdf</p>
+              <p>PDF Document</p>
+            </div>
+            <MdClose />
+          </div>
         </div>
         <div className={styles.messageInput}>
           <MdAttachFile />

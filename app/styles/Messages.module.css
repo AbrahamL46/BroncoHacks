@@ -5,6 +5,25 @@
   gap: 16px;
 }
 
+.attachment {
+  display: flex;
+  padding: 1.5rem;
+  width: max-content;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background-color: white;
+  border: 2px solid #e7e5e4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  margin: 16px 0;
+  cursor: pointer;
+}
+
+.attachment > div > p:first-of-type {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
 .conversationChip {
   display: flex;
   width: 100%;
@@ -26,7 +45,7 @@
   height: 100%;
   justify-content: space-between;
   grid-column: 2/4;
-  margin-top: 54px;
+  padding-top: 54px;
 }
 
 .messageHistory {
