@@ -17,19 +17,37 @@ function page() {
   const { updateUser } = useContext(UserContext);
   const questions = [
     {
-      question: 'Who are you?',
-      subtitle: 'We’ll use this to connect you with the right resources.',
+      question: language=='English'?'Who are you?':'¿Quién es usted?',
+      subtitle: language=='English'?'We’ll use this to connect you with the right resources.':'Usaremos esto para conectarlo con los recursos adecuados.',
       responses: [
         {
           icon: <MdFavorite className={styles.response_icon} />,
-          answer: 'Migrant',
+          answer: language=='English'?'Immigrant':'Inmigrante',
         },
         {
           icon: <MdCardTravel className={styles.response_icon} />,
-          answer: 'Lawyer',
+          answer: language=='English'?'Lawyer':'Abogado/a',
         },
       ],
     },
+    {
+      question: language=='English'?'What brings you here?':'¿Por qué está usted aquí?',
+      subtitle: language=='English'?'We’ll use this to connect you with the right resources.':'Usaremos esto para conectarlo con los recursos adecuados.',
+      responses: [
+        {
+          icon: <MdFavorite className={styles.response_icon} />,
+          answer: 'Documented',
+        },
+        {
+          icon: <MdFavorite className={styles.response_icon} />,
+          answer: 'Undocumented',
+        },
+        {
+          icon: <MdFavorite className={styles.response_icon} />,
+          answer: 'Rather not say',
+        }
+      ]
+    }
   ];
 
   const updateResponses = useCallback((response) => {
