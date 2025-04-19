@@ -28,7 +28,7 @@ function page() {
   return (
     <main>
       <p>{language == 'English' ? "Let's get to " : 'Vamos a '}</p>
-      <div>
+      <div className="sideBar">
         <p className='contigo know-each-other'>
           <em>{language == 'English' ? ' know ' : ' conocernos'}</em>
         </p>
@@ -36,8 +36,7 @@ function page() {
           {language == 'English' ? ' each other' : ''}
         </p>
       </div>
-      <div>{/* side bar */}</div>
-      <div>
+      <div className="questions">
         {/* render questions */}
         <div>
           {/* if view === 1, render question 1 questions */}
