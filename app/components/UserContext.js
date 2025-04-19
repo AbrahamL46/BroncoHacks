@@ -4,7 +4,7 @@ import { createContext, useState, useEffect } from 'react';
 const UserContext = createContext(null);
 
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState('English');
+  const [user, setUser] = useState(null);
 
   function updateUser(user) {
     setUser(user);

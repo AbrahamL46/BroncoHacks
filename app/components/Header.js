@@ -15,7 +15,6 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
   const { updateLanguage } = useContext(LanguageContext);
   const { user, updateUser } = useContext(UserContext);
-  console.log(user);
 
   const pathname = usePathname();
   return (

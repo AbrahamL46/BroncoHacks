@@ -15,11 +15,13 @@ export async function signUp({ email, password }) {
   return { data, error };
 }
 
-export async function getMessages({ user }) {
-  const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
-  });
+export async function getConversations(user) {
+  const userId = user.user.id;
+
+  const { data, error } = await supabase
+    .from('conversations')
+    .select('*')
+    .filter('users', 'cs', `["${userId}"]`);
 
   return { data, error };
 }
