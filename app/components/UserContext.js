@@ -6,19 +6,19 @@ const UserContext = createContext(null);
 export default function UserProvider({ children }) {
   const [user, setUser] = useState('English');
 
-  function updateLanguage(newLanguage) {
-    setLanguage(newLanguage);
-    localStorage.setItem('language', newLanguage);
+  function updateUser(user) {
+    setUser(user);
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('language');
-    if (storedLanguage) {
-      setLanguage(storedLanguage);
+    const storeduser = localStorage.getItem('user');
+    if (storeduser) {
+      setUser(JSON.parse(storeduser));
     }
   }, []);
   return (
-    <UserContext.Provider value={{ language, updateLanguage }}>
+    <UserContext.Provider value={{ user, updateUser }}>
       {children}
     </UserContext.Provider>
   );

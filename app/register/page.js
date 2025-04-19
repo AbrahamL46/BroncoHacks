@@ -1,8 +1,10 @@
 'use client';
 import { useState, useContext, useCallback } from 'react';
 import { LanguageContext } from '../components/LanguageContext';
+import { UserContext } from '../components/UserContext';
 import { MdCardTravel, MdFavorite } from 'react-icons/md';
 import styles from '../styles/Register.module.css';
+import { signUp } from '../lib/supabase';
 
 // onboarding page:
 // views cycle through views w/ different questions
@@ -11,6 +13,7 @@ function page() {
   const [view, setView] = useState(1);
   const [responses, setResponses] = useState({});
   const { language, updateLanguage } = useContext(LanguageContext);
+  const { updateUser } = useContext(UserContext);
   const questions = [
     {
       question: 'Who are you?',
@@ -31,6 +34,16 @@ function page() {
   const updateResponses = useCallback((response) => {
     setResponses((prev) => ({ ...prev, ...response }));
   }, []);
+
+  async function handleSignUp() {
+    const { data, error } = await signUp({
+      email: responses.email,
+      password: responses.password,
+    });
+    if (!error) {
+      updateUser(data);
+    }
+  }
   return (
     <main>
       <div className={styles.sidebar}>
@@ -73,6 +86,7 @@ function page() {
               </div>
               <div>
                 {/* todo: make these buttons trigger pagination */}
+                {/* hint: use setView() */}
                 <button
                   className={`${styles.pagination_button} ${styles.pagination_button_disabled}`}
                 >
@@ -83,7 +97,6 @@ function page() {
                     responses[questions[view - 1].question] == null &&
                     styles.pagination_button_disabled
                   }`}
-                  onClick={() => setView('info')}
                 >
                   Next →
                 </button>
@@ -98,15 +111,22 @@ function page() {
                 type='email'
                 name='email'
                 id='email'
-                onClick={(e) => updateResponses({ email: e.target.value })}
+                onChange={(e) => updateResponses({ email: e.target.value })}
               />
               <label htmlFor='password'>Password</label>
               <input
                 type='password'
                 name='password'
                 id='password'
-                onClick={(e) => updateResponses({ password: e.target.value })}
+                onChange={(e) => updateResponses({ password: e.target.value })}
               />
+
+              <button
+                className={styles.pagination_button}
+                onClick={handleSignUp}
+              >
+                Next →
+              </button>
             </div>
           )}
         </div>

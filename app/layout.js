@@ -2,6 +2,7 @@ import { Inter, Libre_Baskerville } from 'next/font/google';
 import './globals.css';
 import Header from './components/Header';
 import LanguageProvider from './components/LanguageContext';
+import UserProvider from './components/UserContext';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -23,12 +24,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <LanguageProvider>
-        <body className={`${inter.variable} ${libre.variable}`}>
-          <Header />
-          {children}
-        </body>
-      </LanguageProvider>
+      <UserProvider>
+        <LanguageProvider>
+          <body className={`${inter.variable} ${libre.variable}`}>
+            <Header />
+            {children}
+          </body>
+        </LanguageProvider>
+      </UserProvider>
     </html>
   );
 }
