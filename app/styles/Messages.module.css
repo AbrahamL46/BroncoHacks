@@ -1,14 +1,98 @@
+.container {
+  padding: 42px 96px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.conversationChip {
+  display: flex;
+  width: 100%;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background-color: white;
+  border: 2px solid #e7e5e4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  margin: 16px 0;
+  cursor: pointer;
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  grid-column: 2/4;
+  margin-top: 54px;
+}
+
+.messageHistory {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .message {
   display: inline-flex;
+  flex-direction: column;
   padding: 1rem 1.25rem;
   justify-content: center;
-  align-items: center;
   gap: 0.625rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e7e5e4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  width: max-content;
+  margin-left: auto;
+}
+
+.message a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: underline;
+}
+
+.messageAlt {
+  background: #e7e5e4;
+  margin: 0;
+}
+
+.messageInput {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.messageInput svg {
+  width: 24px;
+  height: 24px;
+}
+
+.messageInput input {
+  display: flex;
+  padding: 1rem 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  flex: 1 0 0;
   border-radius: 0.75rem;
   border: 2px solid #e7e5e4;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
 }
 
-.messageAlt {
-  background: #e7e5e4;
+.messageInput button {
+  display: flex;
+  padding: 1rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid #67e8f9;
+  background: #ecfeff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
 }

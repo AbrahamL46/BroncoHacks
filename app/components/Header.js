@@ -34,18 +34,16 @@ export default function Header() {
           <Link href='/messages'>Messages</Link>
         </nav>
       )}
-      {pathname === '/register' && (
-        <div>
-          <p>Language/Idioma</p>
-          <button onClick={() => updateLanguage('English')}>
-            <Image src={us} width={32} height={32} alt='English' />
-          </button>
+      <div>
+        <p>Language/Idioma</p>
+        <button onClick={() => updateLanguage('English')}>
+          <Image src={us} width={32} height={32} alt='English' />
+        </button>
 
-          <button onClick={() => updateLanguage('Spanish')}>
-            <Image src={mx} width={32} height={32} alt='Spanish' />
-          </button>
-        </div>
-      )}
+        <button onClick={() => updateLanguage('Spanish')}>
+          <Image src={mx} width={32} height={32} alt='Spanish' />
+        </button>
+      </div>
       {pathname != '/register' && user ? (
         <Link href={'/'} onClick={() => updateUser({})}>
           Sign Out

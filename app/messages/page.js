@@ -5,6 +5,7 @@ import { LanguageContext } from '../components/LanguageContext';
 import { useContext, useEffect, useState, Suspense } from 'react';
 import { getConversationHistory, getConversations } from '../lib/supabase';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { MdAttachFile, MdLink } from 'react-icons/md';
 
 export default function page() {
   const { language } = useContext(LanguageContext);
@@ -44,38 +45,56 @@ export default function page() {
     const id = searchParams.get('id');
     if (id) {
       setActiveConversation(id);
+    } else {
+      if (conversations && conversations.data.length > 0) {
+        setActiveConversation(conversations.data[0].id);
+      }
     }
-  }, [searchParams]);
+  }, [searchParams, conversations]);
   return (
-    <main>
+    <main className={styles.container}>
       <div>
-        <h1>Messages</h1>
+        <h1>{language == 'English' ? 'Messages' : 'Mensajes'}</h1>
         <div>
           {/* render all of the conversations, onclick add the convo id to search params + update state */}
           {conversations != null &&
             conversations.data.map((convo, index) => (
               <button
                 key={index}
+                className={styles.conversationChip}
                 onClick={() => setActiveConversation(convo.id)}
               >
-                {convo.id}
+                <b>Social Worker</b>
+                <p>Unread Message</p>
               </button>
             ))}
         </div>
       </div>
-      <div>
-        {/* render conversation thread */}
-        {selectedConversation &&
-          selectedConversation.history.data.map((msg, index) => (
-            <div
-              key={index}
-              className={`${styles.message} ${
-                user.user.id === msg.sender && styles.messageAlt
-              }`}
-            >
-              {msg.message}
-            </div>
-          ))}
+      <div className={styles.messageContainer}>
+        <div className={styles.messageHistory}>
+          {/* render conversation thread */}
+          {selectedConversation &&
+            selectedConversation.history.data.map((msg, index) => (
+              <div
+                key={index}
+                className={`${styles.message} ${
+                  user.user.id === msg.sender && styles.messageAlt
+                }`}
+              >
+                {msg.message}
+                {msg.link && (
+                  <a href={msg.link}>
+                    <MdLink /> Shared Link
+                  </a>
+                )}
+              </div>
+            ))}
+        </div>
+        <div className={styles.messageInput}>
+          <MdAttachFile />
+          <input placeholder='Type your message...' />
+          <button onClick={sendMessage}>Send</button>
+        </div>
       </div>
     </main>
   );
