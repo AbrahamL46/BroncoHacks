@@ -4,7 +4,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 96px;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 }
 
 /* rest of css */
+
+.contigo {
+  font-family: var(--font-libre), Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 64px;
+}
