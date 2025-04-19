@@ -4,7 +4,7 @@ import { createContext, useState } from 'react';
 const LanguageContext = createContext(null);
 
 export default function LangaugeProvider({ children }) {
-  const [langauge, setLanguage] = useState('English');
+  const [language, setLanguage] = useState('English');
 
   function updateLanguage(newLanguage) {
     setLanguage(newLanguage);
@@ -13,7 +13,7 @@ export default function LangaugeProvider({ children }) {
 
   //   add useEffect to capture localStorage language
   return (
-    <LanguageContext.Provider value={{ langauge, updateLanguage }}>
+    <LanguageContext.Provider value={{ language, updateLanguage }}>
       {children}
     </LanguageContext.Provider>
   );
