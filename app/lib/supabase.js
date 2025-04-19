@@ -25,3 +25,12 @@ export async function getConversations(user) {
 
   return { data, error };
 }
+
+export async function getConversationHistory(id) {
+  const { data, error } = await supabase
+    .from('messages')
+    .select('*')
+    .eq('conversation_id', id);
+
+  return { data, error };
+}

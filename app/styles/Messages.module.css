@@ -1,0 +1,14 @@
+.message {
+  display: inline-flex;
+  padding: 1rem 1.25rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e7e5e4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
+.messageAlt {
+  background: #e7e5e4;
+}
