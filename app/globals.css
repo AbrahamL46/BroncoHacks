@@ -32,3 +32,8 @@ a {
   font-family: var(--font-libre), Arial, Helvetica, sans-serif;
   font-weight: normal;
 }
+
+.know-each-other {
+  float: left;
+  margin-right: 5px;
+}
