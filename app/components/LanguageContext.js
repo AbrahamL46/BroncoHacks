@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 const LanguageContext = createContext(null);
 
@@ -8,10 +8,15 @@ export default function LangaugeProvider({ children }) {
 
   function updateLanguage(newLanguage) {
     setLanguage(newLanguage);
-    // add language to localStorage
+    localStorage.setItem('language', newLanguage);
   }
 
-  //   add useEffect to capture localStorage language
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      setLanguage(storedLanguage);
+    }
+  }, []);
   return (
     <LanguageContext.Provider value={{ language, updateLanguage }}>
       {children}
