@@ -11,6 +11,7 @@ export default function Home() {
   return (
     <div>
       <main>
+        {/* home page */}
         <p>{language === 'English' ? 'Hello' : 'Hola'}</p>
       </main>
     </div>
