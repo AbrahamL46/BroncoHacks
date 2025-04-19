@@ -5,6 +5,7 @@ import { UserContext } from '../components/UserContext';
 import { MdCardTravel, MdFavorite } from 'react-icons/md';
 import styles from '../styles/Register.module.css';
 import { signUp } from '../lib/supabase';
+import { redirect } from 'next/navigation';
 
 // onboarding page:
 // views cycle through views w/ different questions
@@ -42,6 +43,7 @@ function page() {
     });
     if (!error) {
       updateUser(data);
+      redirect('/dashboard');
     }
   }
   return (

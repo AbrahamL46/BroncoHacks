@@ -9,10 +9,13 @@ import Link from 'next/link';
 
 import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
+import { UserContext } from './UserContext';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const { updateLanguage } = useContext(LanguageContext);
+  const { user, updateUser } = useContext(UserContext);
+  console.log(user);
 
   const pathname = usePathname();
   return (
@@ -26,7 +29,14 @@ export default function Header() {
           Empowering <b>usted</b>
         </p>
       </Link>
-      {pathname === '/register' ? (
+      {pathname != '/register' && user && (
+        <nav>
+          <Link href='/dashboard'>Dashboard</Link>
+          <Link href='/messages'>Messages</Link>
+          <Link href='/community'>Community</Link>
+        </nav>
+      )}
+      {pathname === '/register' && (
         <div>
           <p>Language/Idioma</p>
           <button onClick={() => updateLanguage('English')}>
@@ -37,6 +47,11 @@ export default function Header() {
             <Image src={mx} width={32} height={32} alt='Spanish' />
           </button>
         </div>
+      )}
+      {pathname != '/register' && user ? (
+        <Link href={'/'} onClick={() => updateUser({})}>
+          Sign Out
+        </Link>
       ) : (
         <Link href={'/register'}>Log In</Link>
       )}

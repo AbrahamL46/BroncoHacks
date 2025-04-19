@@ -14,3 +14,12 @@ export async function signUp({ email, password }) {
 
   return { data, error };
 }
+
+export async function getMessages({ user }) {
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+
+  return { data, error };
+}
