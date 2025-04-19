@@ -1,5 +1,5 @@
 'use client';
-import { useState, useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 import { LanguageContext } from '../components/LanguageContext';
 import { MdCardTravel, MdFavorite } from 'react-icons/md';
 import styles from '../styles/Register.module.css';
@@ -16,15 +16,21 @@ function page() {
       question: 'Who are you?',
       subtitle: 'We’ll use this to connect you with the right resources.',
       responses: [
-        <>
-          <MdFavorite className={styles.response_icon} /> Migrant
-        </>,
-        <>
-          <MdCardTravel className={styles.response_icon} /> Lawyer
-        </>,
+        {
+          icon: <MdFavorite className={styles.response_icon} />,
+          answer: 'Migrant',
+        },
+        {
+          icon: <MdCardTravel className={styles.response_icon} />,
+          answer: 'Lawyer',
+        },
       ],
     },
   ];
+
+  const updateResponses = useCallback((response) => {
+    setResponses({ ...responses, ...response });
+  }, []);
   return (
     <main>
       <div className={styles.sidebar}>
@@ -42,19 +48,39 @@ function page() {
         {/* render questions */}
         <div>
           {/* if view === 1, render question 1 questions */}
-          {view === 1 &&
+          {view === 1 && (
             <div>
-              <h2>{questions[view-1].question}</h2>
-              <p>{questions[view-1].subtitle}</p>
+              <h2>{questions[view - 1].question}</h2>
+              <p>{questions[view - 1].subtitle}</p>
               <div>
-                {questions[view-1].responses.map((q, index) => (
-                  <div key={index}><button className={styles.response_button}>{q}</button></div>
+                {questions[view - 1].responses.map((q, index) => (
+                  <button
+                    className={`${styles.response_button} ${
+                      responses[questions[view - 1].question] === q.answer &&
+                      styles.response_button_active
+                    }`}
+                    key={index}
+                    onClick={() =>
+                      updateResponses({
+                        [questions[view - 1].question]: q.answer,
+                      })
+                    }
+                  >
+                    {q.icon}
+                    {q.answer}
+                  </button>
                 ))}
               </div>
               {/* <button>{questions[view].responses}</button> */}
             </div>
-          }
+          )}
           {/* if view === x render email + password inputs */}
+          {view === 'info' && (
+            <div>
+              <label htmlFor='email'>Email</label>
+              <input type='email' name='email' id='email' />
+            </div>
+          )}
         </div>
         {/* previous/forward buttons */}
         <div></div>
