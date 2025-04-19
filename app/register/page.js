@@ -67,14 +67,16 @@ function page() {
   return (
     <main>
       <div className={styles.sidebar}>
-        <p>{language == 'English' ? "Let's get to " : 'Vamos a '}</p>
         <div>
-          <p className={`${styles.contigo} ${styles.know_each_other}`}>
-            <em>{language == 'English' ? ' know ' : ' conocernos'}</em>
-          </p>
-          <p className={styles.know_each_other}>
-            {language == 'English' ? ' each other' : ''}
-          </p>
+          <p>{language == 'English' ? "Let's get to " : 'Vamos a '}</p>
+          <div>
+            <p className={`${styles.contigo} ${styles.know_each_other}`}>
+              <em>{language == 'English' ? ' know ' : ' conocernos'}</em>
+            </p>
+            <p className={styles.know_each_other}>
+              {language == 'English' ? ' each other' : ''}
+            </p>
+          </div>
         </div>
       </div>
       <div className={styles.questions}>
@@ -117,6 +119,9 @@ function page() {
                     responses[questions[view - 1].question] == null &&
                     styles.pagination_button_disabled
                   }`}
+                  onClick={() =>
+                    setView(view + 1)
+                  }
                 >
                   Next →
                 </button>
