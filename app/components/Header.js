@@ -21,7 +21,7 @@ export default function Header() {
     <header className={styles.header}>
       {/* header content goes here */}
       <Link href='/'>
-        <h1 className='contigo'>
+        <h1 className={styles.contigo}>
           <em>Contigo</em>
         </h1>
         <p>
