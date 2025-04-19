@@ -29,7 +29,7 @@ export default function Header() {
         </p>
       </Link>
       {pathname != '/register' && user && (
-        <nav>
+        <nav className={styles.nav}>
           <Link href='/dashboard'>Dashboard</Link>
           <Link href='/messages'>Messages</Link>
           <Link href='/community'>Community</Link>
