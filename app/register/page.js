@@ -16,30 +16,44 @@ function page() {
       question: 'Who are you?',
       subtitle: 'We’ll use this to connect you with the right resources.',
       responses: [
-        <p className={styles.radioButton}>
-          <MdFavorite /> Migrant
-        </p>,
-        <p>
-          <MdCardTravel /> Lawyer
-        </p>,
+        <>
+          <MdFavorite className={styles.response_icon} /> Migrant
+        </>,
+        <>
+          <MdCardTravel className={styles.response_icon} /> Lawyer
+        </>,
       ],
     },
   ];
   return (
     <main>
-      <p>{language == 'English' ? "Let's get to " : 'Vamos a '}</p>
-      <div className="sideBar">
-        <p className='contigo know-each-other'>
-          <em>{language == 'English' ? ' know ' : ' conocernos'}</em>
-        </p>
-        <p className='know-each-other'>
-          {language == 'English' ? ' each other' : ''}
-        </p>
+      <div className={styles.sidebar}>
+        <p>{language == 'English' ? "Let's get to " : 'Vamos a '}</p>
+        <div>
+          <p className={`${styles.contigo} ${styles.know_each_other}`}>
+            <em>{language == 'English' ? ' know ' : ' conocernos'}</em>
+          </p>
+          <p className={styles.know_each_other}>
+            {language == 'English' ? ' each other' : ''}
+          </p>
+        </div>
       </div>
-      <div className="questions">
+      <div className={styles.questions}>
         {/* render questions */}
         <div>
           {/* if view === 1, render question 1 questions */}
+          {view === 1 &&
+            <div>
+              <h2>{questions[view-1].question}</h2>
+              <p>{questions[view-1].subtitle}</p>
+              <div>
+                {questions[view-1].responses.map((q, index) => (
+                  <div key={index}><button className={styles.response_button}>{q}</button></div>
+                ))}
+              </div>
+              {/* <button>{questions[view].responses}</button> */}
+            </div>
+          }
           {/* if view === x render email + password inputs */}
         </div>
         {/* previous/forward buttons */}
