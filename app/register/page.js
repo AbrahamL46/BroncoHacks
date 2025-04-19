@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { LanguageContext } from '../components/LanguageContext';
 import { MdCardTravel, MdFavorite } from 'react-icons/md';
 import styles from '../styles/Register.module.css';
 
@@ -9,6 +10,7 @@ import styles from '../styles/Register.module.css';
 function page() {
   const [view, setView] = useState(1);
   const [responses, setResponses] = useState({});
+  const { language, updateLanguage } = useContext(LanguageContext);
   const questions = [
     {
       question: 'Who are you?',
@@ -25,10 +27,14 @@ function page() {
   ];
   return (
     <main>
-      <p>{language=="English"?"Let's get to ":"Vamos a "}</p>
+      <p>{language == 'English' ? "Let's get to " : 'Vamos a '}</p>
       <div>
-        <p className="contigo know-each-other"><em>{language=="English"?" know ":" conocernos"}</em></p>
-        <p className="know-each-other">{language=="English"?" each other":""}</p>
+        <p className='contigo know-each-other'>
+          <em>{language == 'English' ? ' know ' : ' conocernos'}</em>
+        </p>
+        <p className='know-each-other'>
+          {language == 'English' ? ' each other' : ''}
+        </p>
       </div>
       <div>{/* side bar */}</div>
       <div>
