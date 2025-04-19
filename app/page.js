@@ -11,11 +11,7 @@ export default function Home() {
   return (
     <div>
       <main>
-        <p>{language=="English"?"Let's get to ":"Vamos a "}</p>
-        <div>
-          <p className="contigo know-each-other"><em>{language=="English"?" know ":" conocernos"}</em></p>
-          <p className="know-each-other">{language=="English"?" each other":""}</p>
-        </div>
+        
       </main>
     </div>
   );
