@@ -6,6 +6,8 @@ import { MdCardTravel, MdFavorite } from 'react-icons/md';
 import styles from '../styles/Register.module.css';
 import { signUp } from '../lib/supabase';
 import { redirect } from 'next/navigation';
+import { motion } from 'motion/react';
+import { motionProps } from '../lib/motionProps';
 
 // onboarding page:
 // views cycle through views w/ different questions
@@ -17,22 +19,31 @@ function page() {
   const { updateUser } = useContext(UserContext);
   const questions = [
     {
-      question: language=='English'?'Who are you?':'¿Quién es usted?',
-      subtitle: language=='English'?'We’ll use this to connect you with the right resources.':'Usaremos esto para conectarlo con los recursos adecuados.',
+      question: language == 'English' ? 'Who are you?' : '¿Quién es usted?',
+      subtitle:
+        language == 'English'
+          ? 'We’ll use this to connect you with the right resources.'
+          : 'Usaremos esto para conectarlo con los recursos adecuados.',
       responses: [
         {
           icon: <MdFavorite className={styles.response_icon} />,
-          answer: language=='English'?'Immigrant':'Inmigrante',
+          answer: language == 'English' ? 'Immigrant' : 'Inmigrante',
         },
         {
           icon: <MdCardTravel className={styles.response_icon} />,
-          answer: language=='English'?'Lawyer':'Abogado/a',
+          answer: language == 'English' ? 'Lawyer' : 'Abogado/a',
         },
       ],
     },
     {
-      question: language=='English'?'What brings you here?':'¿Por qué está usted aquí?',
-      subtitle: language=='English'?'We’ll use this to connect you with the right resources.':'Usaremos esto para conectarlo con los recursos adecuados.',
+      question:
+        language == 'English'
+          ? 'What brings you here?'
+          : '¿Por qué está usted aquí?',
+      subtitle:
+        language == 'English'
+          ? 'We’ll use this to connect you with the right resources.'
+          : 'Usaremos esto para conectarlo con los recursos adecuados.',
       responses: [
         {
           icon: <MdFavorite className={styles.response_icon} />,
@@ -45,9 +56,9 @@ function page() {
         {
           icon: <MdFavorite className={styles.response_icon} />,
           answer: 'Rather not say',
-        }
-      ]
-    }
+        },
+      ],
+    },
   ];
 
   const updateResponses = useCallback((response) => {
@@ -84,28 +95,29 @@ function page() {
         <div>
           {/* if view === 1, render question 1 questions */}
           {view === 1 && (
-            <div>
+            <motion.div
+              className={styles.questionContainer}
+              {...motionProps(0)}
+            >
               <h2>{questions[view - 1].question}</h2>
               <p>{questions[view - 1].subtitle}</p>
-              <div>
-                {questions[view - 1].responses.map((q, index) => (
-                  <button
-                    className={`${styles.response_button} ${
-                      responses[questions[view - 1].question] === q.answer &&
-                      styles.response_button_active
-                    }`}
-                    key={index}
-                    onClick={() =>
-                      updateResponses({
-                        [questions[view - 1].question]: q.answer,
-                      })
-                    }
-                  >
-                    {q.icon}
-                    {q.answer}
-                  </button>
-                ))}
-              </div>
+              {questions[view - 1].responses.map((q, index) => (
+                <button
+                  className={`${styles.response_button} ${
+                    responses[questions[view - 1].question] === q.answer &&
+                    styles.response_button_active
+                  }`}
+                  key={index}
+                  onClick={() =>
+                    updateResponses({
+                      [questions[view - 1].question]: q.answer,
+                    })
+                  }
+                >
+                  {q.icon}
+                  {q.answer}
+                </button>
+              ))}
               <div>
                 {/* todo: make these buttons trigger pagination */}
                 {/* hint: use setView() */}
@@ -119,23 +131,68 @@ function page() {
                     responses[questions[view - 1].question] == null &&
                     styles.pagination_button_disabled
                   }`}
-                  onClick={() =>
-                    setView(view + 1)
-                  }
+                  onClick={() => setView(view + 1)}
                 >
                   Next →
                 </button>
               </div>
-            </div>
+            </motion.div>
+          )}
+          {view === 2 && (
+            <motion.div
+              className={styles.questionContainer}
+              {...motionProps(0)}
+            >
+              <h2>{questions[view - 1].question}</h2>
+              <p>{questions[view - 1].subtitle}</p>
+              {questions[view - 1].responses.map((q, index) => (
+                <button
+                  className={`${styles.response_button} ${
+                    responses[questions[view - 1].question] === q.answer &&
+                    styles.response_button_active
+                  }`}
+                  key={index}
+                  onClick={() =>
+                    updateResponses({
+                      [questions[view - 1].question]: q.answer,
+                    })
+                  }
+                >
+                  {q.icon}
+                  {q.answer}
+                </button>
+              ))}
+              <div>
+                {/* todo: make these buttons trigger pagination */}
+                {/* hint: use setView() */}
+                <button
+                  className={`${styles.pagination_button} ${styles.pagination_button_disabled}`}
+                >
+                  ← Previous
+                </button>
+                <button
+                  className={`${styles.pagination_button} ${
+                    responses[questions[view - 1].question] == null &&
+                    styles.pagination_button_disabled
+                  }`}
+                  onClick={() => setView('info')}
+                >
+                  Next →
+                </button>
+              </div>
+            </motion.div>
           )}
           {/* if view === x render email + password inputs */}
           {view === 'info' && (
-            <div>
+            <motion.div {...motionProps(0)} className={styles.registerForm}>
+              <h2>Complete Sign Up</h2>
+              <p>Finish your account set up.</p>
               <label htmlFor='email'>Email</label>
               <input
                 type='email'
                 name='email'
                 id='email'
+                placeholder='email@example.com'
                 onChange={(e) => updateResponses({ email: e.target.value })}
               />
               <label htmlFor='password'>Password</label>
@@ -143,16 +200,12 @@ function page() {
                 type='password'
                 name='password'
                 id='password'
+                placeholder='••••••'
                 onChange={(e) => updateResponses({ password: e.target.value })}
               />
 
-              <button
-                className={styles.pagination_button}
-                onClick={handleSignUp}
-              >
-                Next →
-              </button>
-            </div>
+              <button onClick={handleSignUp}>Finish Sign Up</button>
+            </motion.div>
           )}
         </div>
         {/* previous/forward buttons */}

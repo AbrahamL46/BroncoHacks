@@ -5,13 +5,13 @@ import Image from 'next/image';
 
 import visa from '../../public/assets/visa.jpeg';
 import { MdAssignment } from 'react-icons/md';
-import styles from '../styles/Dashboard.module.css'
+import styles from '../styles/Dashboard.module.css';
 import Link from 'next/link';
 
 export default function page() {
   const { user } = useContext(UserContext);
   return (
-    <main>
+    <main className={styles.container}>
       {/* bento box dashboard */}
       <div>
         {/* user requested resource guide */}
@@ -19,12 +19,14 @@ export default function page() {
           <div>
             <h2>
               <button className={styles.visa_button}>
-                <MdAssignment className={styles.visa_icon} /> Start Your Student Visa Application
+                <MdAssignment className={styles.visa_icon} /> Start Your Student
+                Visa Application
               </button>
             </h2>
             <Link href='/resources/student-visa'></Link>
           </div>
         </div>
+        <div></div>
       </div>
     </main>
   );
