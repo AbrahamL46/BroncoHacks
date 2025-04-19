@@ -52,3 +52,22 @@
   flex-shrink: 0;
   aspect-ratio: 1/1;
 }
+
+.pagination_button {
+  border-radius: 0.75rem;
+  border: 2px solid #e7e5e4;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+  display: inline-flex;
+  padding: 1rem 1.25rem;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.pagination_button_disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

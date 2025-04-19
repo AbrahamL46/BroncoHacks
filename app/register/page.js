@@ -31,6 +31,7 @@ function page() {
   const updateResponses = useCallback((response) => {
     setResponses({ ...responses, ...response });
   }, []);
+  console.log(responses[questions[view - 1].question] == undefined);
   return (
     <main>
       <div className={styles.sidebar}>
@@ -71,7 +72,22 @@ function page() {
                   </button>
                 ))}
               </div>
-              {/* <button>{questions[view].responses}</button> */}
+              <div>
+                {/* todo: make these buttons trigger pagination */}
+                <button
+                  className={`${styles.pagination_button} ${styles.pagination_button_disabled}`}
+                >
+                  ← Previous
+                </button>
+                <button
+                  className={`${styles.pagination_button} ${
+                    responses[questions[view - 1].question] == null &&
+                    styles.pagination_button_disabled
+                  }`}
+                >
+                  Next →
+                </button>
+              </div>
             </div>
           )}
           {/* if view === x render email + password inputs */}
