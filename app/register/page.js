@@ -29,9 +29,8 @@ function page() {
   ];
 
   const updateResponses = useCallback((response) => {
-    setResponses({ ...responses, ...response });
+    setResponses((prev) => ({ ...prev, ...response }));
   }, []);
-  console.log(responses[questions[view - 1].question] == undefined);
   return (
     <main>
       <div className={styles.sidebar}>
@@ -84,6 +83,7 @@ function page() {
                     responses[questions[view - 1].question] == null &&
                     styles.pagination_button_disabled
                   }`}
+                  onClick={() => setView('info')}
                 >
                   Next →
                 </button>
@@ -94,7 +94,19 @@ function page() {
           {view === 'info' && (
             <div>
               <label htmlFor='email'>Email</label>
-              <input type='email' name='email' id='email' />
+              <input
+                type='email'
+                name='email'
+                id='email'
+                onClick={(e) => updateResponses({ email: e.target.value })}
+              />
+              <label htmlFor='password'>Password</label>
+              <input
+                type='password'
+                name='password'
+                id='password'
+                onClick={(e) => updateResponses({ password: e.target.value })}
+              />
             </div>
           )}
         </div>
