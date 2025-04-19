@@ -32,7 +32,6 @@ export default function Header() {
         <nav className={styles.nav}>
           <Link href='/dashboard'>Dashboard</Link>
           <Link href='/messages'>Messages</Link>
-          <Link href='/community'>Community</Link>
         </nav>
       )}
       {pathname === '/register' && (
