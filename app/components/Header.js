@@ -16,7 +16,7 @@ export default function Header() {
     <header className={styles.header}>
       {/* header content goes here */}
       <div>
-        <h1>Contigo</h1>
+        <h1 className="contigo"><em>Contigo</em></h1>
         <p>
           Empowering <b>usted</b>
         </p>
