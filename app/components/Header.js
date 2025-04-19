@@ -28,6 +28,9 @@ export default function Header() {
         </button>
 
         {/* add spanish button */}
+        <button onClick={() => updateLanguage('Spanish')}>
+          <Image src={mx} width={32} height={32} alt='Spanish' />
+        </button>
       </div>
     </header>
   );
