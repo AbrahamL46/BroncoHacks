@@ -17,3 +17,6 @@ by connecting them social workers to find resources.
 
 - 🌐 Next.js: a performant web framework that allows us to create dynamic and clean UIs.
 - 💾 Supabase: a PostgreSQL solution that lets us host all of our client's data without any security concerns.
+
+## Video Link
+https://youtu.be/SYuP6MH14jA
